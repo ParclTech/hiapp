@@ -1,0 +1,128 @@
+<div id="dashboard-analytics">
+
+    <!-- WIDGETS -->
+    <div id="widgets">
+
+        <!-- WIDGET GROUP -->
+        <div class="widget-group" layout="row" flex="100" layout-wrap>
+
+            <!-- WIDGET 2 -->
+            <ms-widget flippable="false" layout="column" flex="100" flex-gt-md="65">
+
+                <!-- Front -->
+                <ms-widget-front class="white-bg">
+                    <div class="p-16" layout="row" layout-align="space-between center">
+                        <div class="h3">My Property Searches</div>
+
+                        <md-menu>
+                            <md-button aria-label="more" class="md-icon-button"
+                                       ng-click="$mdOpenMenu($event)">
+                                <md-icon md-font-icon="icon-dots-vertical"></md-icon>
+                            </md-button>
+                            <md-menu-content width="2">
+                                <md-menu-item>
+                                    <md-button ng-click="refreshWidget()" aria-label="Refresh widget">
+                                        Refresh
+                                    </md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+                    </div>
+
+                    <div>
+                        <ui-gmap-google-map center="vm.widget2.map.center" zoom="vm.widget2.map.zoom"
+                                            options="vm.widget2.map.options">
+                            <ui-gmap-markers models="vm.widget2.map.markers" coords="'coords'">
+                                <ui-gmap-windows show="show">
+                                    <div ng-non-bindable>{{sessions}}</div>
+                                </ui-gmap-windows>
+                            </ui-gmap-markers>
+                        </ui-gmap-google-map>
+                    </div>
+
+                </ms-widget-front>
+                <!-- / Front -->
+
+            </ms-widget>
+            <!-- / WIDGET 2 -->
+
+            <!-- WIDGET 3 -->
+            <ms-widget flippable="false" layout="column" flex="100" flex-gt-md="35">
+
+                <!-- Front -->
+                <ms-widget-front class="white-bg">
+                    <div class="ph-16 border-bottom" layout="row" layout-align="space-between center">
+                        <div class="h3">Top 5 Results</div>
+
+                        <div class="pv-16">
+                            Zip Code
+                        </div>
+                    </div>
+
+                    <div class="ph-16 pv-20 border-bottom"
+                         ng-repeat="page in vm.widget3.pages[vm.widget3.currentRange]"
+                         layout="row" layout-align="space-between center">
+                        <div layout="column" flex>
+                            <span class="h4 pb-10">{{page.path}}</span>
+                        </div>
+                        <div class="pl-32 h3 font-weight-500 secondary-text">
+                            {{page.zip}}
+                        </div>
+                    </div>
+
+                </ms-widget-front>
+                <!-- / Front -->
+
+            </ms-widget>
+            <!-- / WIDGET 3 -->
+
+        </div>
+        <!-- / WIDGET GROUP -->
+
+
+        <!-- WIDGET GROUP -->
+        <div class="widget-group" layout="row" flex="100" layout-wrap>
+
+            <!-- WIDGET 4 -->
+            <ms-widget flippable="false" layout="row" flex="100">
+
+                <!-- Front -->
+                <ms-widget-front class="white-bg">
+                    <div class="ph-16 pt-16 pb-8 md-accent-bg">
+                        <div class="h3">Recent Searches</div>
+                    </div>
+
+                    <md-tabs class="md-accent no-radius" md-dynamic-height>
+                        <md-tab label="{{tab.label}}" ng-repeat="tab in vm.widget4.tabs">
+
+                            <div layout="row" layout-align="start center" layout-wrap>
+
+                                <div flex="100" flex-gt-xs="100" flex-gt-md="100"
+                                     ng-repeat="group in tab.groups">
+                                    <div class="h2 m-16 pb-16 border-bottom">{{group.title}}</div>
+
+                                    <div class="p-16 pb-32" ng-repeat="data in group.data">
+                                        <div class="pb-8" layout="row" layout-align="space-between start">
+                                            <span class="h3">{{data.title}}</span>
+                                            <span class="h3 secondary-text font-weight-500">{{data.value}}%</span>
+                                        </div>
+                                        <md-progress-linear class="{{data.progressColor}}" md-mode="determinate"
+                                                            value="{{data.value}}"></md-progress-linear>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </md-tab>
+                    </md-tabs>
+
+                </ms-widget-front>
+                <!-- / Front -->
+
+            </ms-widget>
+            <!-- / WIDGET 4 -->
+
+        </div>
+        <!-- / WIDGET GROUP -->
+    </div>
+</div>
